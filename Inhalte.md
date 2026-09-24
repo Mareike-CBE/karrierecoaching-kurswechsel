@@ -46,6 +46,13 @@ Dauer: 5 × 60 Min.
 Preis: 540 €
 Beschreibung: Fünf Sitzungen über acht bis zehn Wochen. Von der Standortbestimmung bis zur ersten Bewerbung.
 
+### Design your Career
+Dauer: 3 Monate · Kick-off + 6 × 60 Min.
+Preis: 1.200 € oder 3 × 390 €
+Beschreibung: Drei Monate, ein klares Ziel. Wir starten mit einem Kick-off. Danach alle zwei Wochen ein 1:1-Check-in.
+Zwischen den Sessions arbeitest du mit Videos, Übungsaufgaben und unserem gemeinsamen Miro-Board.
+Dazu kommt KI-Unterstützung: eine Promptsammlung und Bewerbungscoaching mit KI.
+
 ## Gruppentermine
 
 ### Info-Abend: Wie klappt ein Quereinstieg?
