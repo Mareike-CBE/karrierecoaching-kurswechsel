@@ -1,0 +1,189 @@
+/* Kurswechsel: Aussehen nach Mareike_StyleGuide v1.0 (Mai 2026) */
+:root {
+  --midnight-ink: #1A1A2E;
+  --warm-white: #F5F3EF;
+  --signal-purple: #7F77DD;
+  --lavender-mist: #EEEDFE;
+  --soft-iris: #AFA9EC;
+  --deep-violet: #3C3489;
+  --ink-mid: #5C5A7A;
+  --rule: #D5D3F0;
+
+  --display: 'Syne', Arial, sans-serif;
+  --body: 'Inter', Arial, sans-serif;
+
+  --max-w: 720px;
+  --gutter: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+body {
+  background: var(--warm-white);
+  color: var(--midnight-ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--display); font-style: normal; }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+/* ─── Kopfbereich ─── */
+.kopf {
+  background: var(--midnight-ink);
+  color: var(--warm-white);
+  padding: max(40px, env(safe-area-inset-top)) 0 36px;
+}
+.kopf-zusatz {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft-iris);
+  margin-bottom: 8px;
+}
+.kopf h1 { font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -0.01em; }
+.kopf-spruch {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--signal-purple);
+  margin-top: 10px;
+}
+
+.inhalt { padding-top: 28px; padding-bottom: 48px; }
+
+.fehler {
+  background: #fff;
+  border-left: 3px solid var(--signal-purple);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+/* ─── Karten ─── */
+.naechster { margin-bottom: 32px; }
+.naechster .label { margin-bottom: 8px; }
+
+.karte {
+  background: var(--lavender-mist);
+  border-top: 2px solid var(--signal-purple);
+  padding: 20px;
+}
+.karte + .karte { margin-top: 16px; }
+.karte h3 { font-weight: 500; font-size: 18px; line-height: 1.3; margin: 6px 0 8px; }
+.karte-text { color: var(--ink-mid); }
+.karte-text p + p { margin-top: 0.5em; }
+.karte-fuss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+.preis { font-weight: 600; }
+
+.knopf {
+  display: inline-block;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: var(--deep-violet);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  text-decoration: none;
+}
+.knopf:hover { background: var(--midnight-ink); }
+
+.karte--gross {
+  background: var(--signal-purple);
+  border-top: none;
+  border-radius: 8px;
+  color: var(--midnight-ink);
+}
+.karte--gross .label,
+.karte--gross .karte-text { color: var(--midnight-ink); }
+.karte--gross h3 { font-weight: 600; font-size: 22px; }
+.karte--gross .knopf { background: #fff; color: var(--deep-violet); }
+.karte--gross .knopf:hover { background: var(--warm-white); }
+
+/* ─── Filter ─── */
+.filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.filter button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--midnight-ink);
+  font: 500 14px/1.2 var(--body);
+  cursor: pointer;
+}
+.filter button[aria-pressed="true"] {
+  background: var(--midnight-ink);
+  border-color: var(--midnight-ink);
+  color: var(--warm-white);
+}
+.filter button:focus-visible,
+.knopf:focus-visible,
+.fuss-mail:focus-visible { outline: 3px solid var(--signal-purple); outline-offset: 2px; }
+/* Auf der lila Karte wäre ein lila Rahmen unsichtbar. */
+.karte--gross .knopf:focus-visible { outline-color: var(--midnight-ink); }
+
+.leer { color: var(--ink-mid); padding: 8px 0; }
+.leer a { color: var(--deep-violet); }
+
+/* ─── Über mich ─── */
+.ueber { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.abschnitt-titel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.abschnitt-titel::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: var(--signal-purple);
+  flex-shrink: 0;
+}
+.ueber h3 { font-weight: 500; font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
+#ueber-text { color: var(--ink-mid); }
+#ueber-text p + p { margin-top: 0.8em; }
+
+/* ─── Fußbereich ─── */
+.fuss {
+  background: var(--midnight-ink);
+  color: var(--warm-white);
+  padding: 40px 0 max(40px, env(safe-area-inset-bottom));
+}
+.fuss-name { font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1.2; margin-bottom: 6px; }
+.fuss-mail { color: var(--warm-white); }
+.fuss-hinweis { font-size: 13px; line-height: 1.6; color: var(--soft-iris); margin-top: 16px; }
+
+/* ─── Größere Bildschirme ─── */
+@media (min-width: 680px) {
+  :root { --gutter: 40px; }
+  .kopf h1 { font-size: 40px; }
+  .abschnitt-titel { font-size: 26px; }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "kurswechsel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/content.test.js",
+    "start": "node tools/server.mjs"
+  }
+}

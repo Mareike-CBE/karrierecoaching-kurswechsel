@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kurswechsel – Karrierecoaching</title>
+  <meta name="description" content="Online-Karrierecoaching für deine berufliche Neuorientierung. Termine, Preise, Anmeldung.">
+  <meta name="theme-color" content="#1A1A2E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Kurswechsel">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="kopf">
+    <div class="wrap">
+      <p class="kopf-zusatz" id="zusatz"></p>
+      <h1 id="titel">Kurswechsel</h1>
+      <p class="kopf-spruch" id="spruch"></p>
+    </div>
+  </header>
+
+  <main class="wrap inhalt">
+    <p class="fehler" id="fehler" hidden>Die Inhalte laden gerade nicht. Versuch es gleich noch einmal.</p>
+
+    <section class="naechster" id="naechster-bereich" aria-labelledby="naechster-label" hidden>
+      <p class="label" id="naechster-label">Nächster Termin</p>
+      <div id="naechster"></div>
+    </section>
+
+    <section aria-label="Angebote und Termine">
+      <div class="filter" role="group" aria-label="Angebote filtern">
+        <button type="button" data-filter="alle" aria-pressed="true">Alle</button>
+        <button type="button" data-filter="einzel" aria-pressed="false">Einzelcoaching</button>
+        <button type="button" data-filter="gruppe" aria-pressed="false">Gruppentermine</button>
+      </div>
+      <div class="liste" id="liste" aria-live="polite"></div>
+    </section>
+
+    <section class="ueber" id="ueber" hidden>
+      <h2 class="abschnitt-titel">Über mich</h2>
+      <h3 id="ueber-name"></h3>
+      <div id="ueber-text"></div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="wrap">
+      <p class="fuss-name" id="fuss-name">Kurswechsel</p>
+      <a class="fuss-mail" id="fuss-mail" hidden></a>
+      <p class="fuss-hinweis">Beispielseite aus einem Workshop. Preise und Termine sind Beispiele.</p>
+    </div>
+  </footer>
+</body>
+</html>

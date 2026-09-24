@@ -1,0 +1,8 @@
+.env
+.env.*
+node_modules/
+.DS_Store
+.superpowers/
+
+# Marken-Styleguide bleibt privat (nur lokal)
+docs/Styleguide/

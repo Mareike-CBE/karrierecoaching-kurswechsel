@@ -1,0 +1,10 @@
+# Netlify veröffentlicht diesen Ordner direkt, ohne Build-Schritt.
+[build]
+  publish = "."
+
+# Browser sollen bei jedem Laden nachfragen, ob es etwas Neues gibt.
+# Eine Regel für alles, damit sich keine Regeln überschneiden.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
