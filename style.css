@@ -1,4 +1,5 @@
-/* Kurswechsel: Aussehen nach Mareike_StyleGuide v1.0 (Mai 2026) */
+/* Kurswechsel: Aussehen nach Mareike_StyleGuide v1.0 (Mai 2026)
+   Nur Styleguide-Farben und ihre transparenten Varianten. */
 :root {
   --midnight-ink: #1A1A2E;
   --warm-white: #F5F3EF;
@@ -6,86 +7,116 @@
   --lavender-mist: #EEEDFE;
   --soft-iris: #AFA9EC;
   --deep-violet: #3C3489;
-  --ink-mid: #5C5A7A;
-  --rule: #D5D3F0;
+
+  /* Abgeleitete Töne (nur Transparenz, keine neuen Farben) */
+  --ink-soft: rgba(26, 26, 46, 0.72);      /* Nebentext, mind. 6,29:1 */
+  --rule: rgba(175, 169, 236, 0.45);       /* feine Linien */
+  --shadow-sm: 0 1px 2px rgba(26, 26, 46, 0.04), 0 4px 16px rgba(26, 26, 46, 0.05);
+  --shadow-md: 0 2px 4px rgba(26, 26, 46, 0.05), 0 12px 32px rgba(26, 26, 46, 0.08);
+  --shadow-hero: 0 4px 8px rgba(60, 52, 137, 0.12), 0 20px 48px rgba(60, 52, 137, 0.22);
 
   --display: 'Syne', Arial, sans-serif;
   --body: 'Inter', Arial, sans-serif;
 
+  --radius: 16px;
+  --radius-lg: 22px;
   --max-w: 720px;
   --gutter: 20px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
 
 body {
   background: var(--warm-white);
   color: var(--midnight-ink);
   font-family: var(--body);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
 }
 
-h1, h2, h3 { font-family: var(--display); font-style: normal; }
+h1, h2, h3 { font-family: var(--display); font-style: normal; text-wrap: balance; }
+p { text-wrap: pretty; }
 
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
 
+/* Kleine Überzeile, z. B. "Gruppentermin · 12. Okt · 90 Min" */
 .label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 0.1em;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-mid);
+  color: var(--ink-soft);
 }
 
 /* ─── Kopfbereich ─── */
 .kopf {
   background: var(--midnight-ink);
   color: var(--warm-white);
-  padding: max(40px, env(safe-area-inset-top)) 0 36px;
+  padding: max(44px, calc(env(safe-area-inset-top) + 24px)) 0 40px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 .kopf-zusatz {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--soft-iris);
-  margin-bottom: 8px;
+  color: rgba(245, 243, 239, 0.7);          /* 8,08:1 */
+  margin-bottom: 10px;
 }
-.kopf h1 { font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -0.01em; }
+.kopf-zusatz:empty { display: none; }
+.kopf h1 { font-weight: 700; font-size: 34px; line-height: 1.05; letter-spacing: -0.015em; }
 .kopf-spruch {
   font-family: var(--display);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
-  line-height: 1.3;
-  color: var(--signal-purple);
-  margin-top: 10px;
+  line-height: 1.35;
+  color: var(--soft-iris);                  /* 7,89:1 */
+  margin-top: 12px;
+  max-width: 32ch;
 }
+.kopf-spruch:empty { display: none; }
 
-.inhalt { padding-top: 28px; padding-bottom: 48px; }
+.inhalt { padding-top: 32px; padding-bottom: 56px; }
 
 .fehler {
   background: #fff;
+  border: 1px solid var(--rule);
   border-left: 3px solid var(--signal-purple);
-  padding: 12px 16px;
+  border-radius: 12px;
+  padding: 14px 16px;
   margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 /* ─── Karten ─── */
-.naechster { margin-bottom: 32px; }
-.naechster .label { margin-bottom: 8px; }
+.naechster { margin-bottom: 40px; }
+.naechster > .label { margin-bottom: 12px; }
 
 .karte {
-  background: var(--lavender-mist);
-  border-top: 2px solid var(--signal-purple);
-  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px 20px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 .karte + .karte { margin-top: 16px; }
-.karte h3 { font-weight: 500; font-size: 18px; line-height: 1.3; margin: 6px 0 8px; }
-.karte-text { color: var(--ink-mid); }
+/* Metazeile in Karten: normale Schreibweise, bricht ruhiger um */
+.karte > .label {
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+.karte h3 { font-weight: 600; font-size: 19px; line-height: 1.3; margin: 8px 0; }
+.karte-text { color: var(--ink-soft); }
 .karte-text p + p { margin-top: 0.5em; }
 .karte-fuss {
   display: flex;
@@ -93,97 +124,163 @@ h1, h2, h3 { font-family: var(--display); font-style: normal; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
 }
-.preis { font-weight: 600; }
+.preis { font-weight: 600; font-size: 17px; }
+
+@media (hover: hover) {
+  .liste .karte:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--soft-iris);
+    transform: translateY(-2px);
+  }
+}
 
 .knopf {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  background: var(--deep-violet);
+  padding: 10px 22px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: var(--deep-violet);           /* Weiß darauf: 10,27:1 */
   color: #fff;
   font-weight: 600;
   font-size: 15px;
   line-height: 24px;
   text-decoration: none;
+  transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
 }
 .knopf:hover { background: var(--midnight-ink); }
+.knopf:active { transform: scale(0.97); }
 
+/* Die große Karte "Nächster Termin" bleibt der Blickfang */
 .karte--gross {
   background: var(--signal-purple);
-  border-top: none;
-  border-radius: 8px;
-  color: var(--midnight-ink);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 26px 22px 22px;
+  color: var(--midnight-ink);               /* 4,54:1 – deshalb ohne Transparenz */
+  box-shadow: var(--shadow-hero);
 }
 .karte--gross .label,
 .karte--gross .karte-text { color: var(--midnight-ink); }
-.karte--gross h3 { font-weight: 600; font-size: 22px; }
-.karte--gross .knopf { background: #fff; color: var(--deep-violet); }
-.karte--gross .knopf:hover { background: var(--warm-white); }
+.karte--gross h3 { font-weight: 700; font-size: 24px; line-height: 1.2; margin: 10px 0; }
+.karte--gross .karte-fuss { border-top-color: rgba(26, 26, 46, 0.18); }
+.karte--gross .preis { font-size: 18px; }
+.karte--gross .knopf {
+  background: #fff;
+  color: var(--deep-violet);                /* 10,27:1 */
+  box-shadow: 0 2px 8px rgba(26, 26, 46, 0.12);
+}
+.karte--gross .knopf:hover { background: var(--lavender-mist); }
 
 /* ─── Filter ─── */
-.filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.filter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 .filter button {
   min-height: 44px;
-  padding: 10px 16px;
+  padding: 10px 12px;
   border: 1px solid var(--rule);
   border-radius: 999px;
   background: #fff;
   color: var(--midnight-ink);
   font: 500 14px/1.2 var(--body);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
 }
+.filter button:hover { background: var(--lavender-mist); border-color: var(--soft-iris); }
+.filter button:active { transform: scale(0.97); }
 .filter button[aria-pressed="true"] {
-  background: var(--midnight-ink);
-  border-color: var(--midnight-ink);
-  color: var(--warm-white);
+  background: var(--deep-violet);           /* Weiß darauf: 10,27:1 */
+  border-color: var(--deep-violet);
+  color: #fff;
 }
+
+/* ─── Tastatur-Fokus ─── */
 .filter button:focus-visible,
 .knopf:focus-visible,
-.fuss-mail:focus-visible { outline: 3px solid var(--signal-purple); outline-offset: 2px; }
+.leer a:focus-visible {
+  outline: 3px solid var(--deep-violet);
+  outline-offset: 3px;
+}
 /* Auf der lila Karte wäre ein lila Rahmen unsichtbar. */
 .karte--gross .knopf:focus-visible { outline-color: var(--midnight-ink); }
+/* Im dunklen Fußbereich ein heller Rahmen */
+.fuss-mail:focus-visible { outline: 3px solid var(--soft-iris); outline-offset: 3px; border-radius: 4px; }
 
-.leer { color: var(--ink-mid); padding: 8px 0; }
-.leer a { color: var(--deep-violet); }
+.leer { color: var(--ink-soft); padding: 12px 0 0; }
+.leer a { color: var(--deep-violet); text-underline-offset: 3px; }
 
 /* ─── Über mich ─── */
-.ueber { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.ueber { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--rule); }
 .abschnitt-titel {
   display: flex;
   align-items: center;
   gap: 12px;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1.2;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .abschnitt-titel::before {
   content: '';
-  width: 32px;
-  height: 2px;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
   background: var(--signal-purple);
   flex-shrink: 0;
 }
-.ueber h3 { font-weight: 500; font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
-#ueber-text { color: var(--ink-mid); }
+.ueber h3 { font-weight: 600; font-size: 19px; line-height: 1.3; margin-bottom: 10px; }
+#ueber-text { color: var(--ink-soft); max-width: 62ch; }
 #ueber-text p + p { margin-top: 0.8em; }
 
 /* ─── Fußbereich ─── */
 .fuss {
   background: var(--midnight-ink);
   color: var(--warm-white);
-  padding: 40px 0 max(40px, env(safe-area-inset-bottom));
+  padding: 44px 0 max(44px, calc(env(safe-area-inset-bottom) + 24px));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
-.fuss-name { font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1.2; margin-bottom: 6px; }
-.fuss-mail { color: var(--warm-white); }
+.fuss-name { font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1.2; margin-bottom: 8px; }
+.fuss-mail {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--warm-white);
+  text-decoration: underline;
+  text-decoration-color: var(--soft-iris);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s var(--ease);
+}
+.fuss-mail:hover { text-decoration-color: var(--warm-white); }
 .fuss-hinweis { font-size: 13px; line-height: 1.6; color: var(--soft-iris); margin-top: 16px; }
 
 /* ─── Größere Bildschirme ─── */
 @media (min-width: 680px) {
   :root { --gutter: 40px; }
-  .kopf h1 { font-size: 40px; }
-  .abschnitt-titel { font-size: 26px; }
+  .filter { gap: 8px; }
+  .filter button { padding: 10px 18px; }
+  .kopf { padding-top: max(64px, calc(env(safe-area-inset-top) + 24px)); padding-bottom: 56px; }
+  .kopf h1 { font-size: 44px; }
+  .kopf-spruch { font-size: 20px; }
+  .inhalt { padding-top: 48px; padding-bottom: 72px; }
+  .karte { padding: 26px 28px 24px; }
+  .karte--gross { padding: 34px 32px 28px; }
+  .karte--gross h3 { font-size: 28px; }
+  .abschnitt-titel { font-size: 28px; }
+}
+
+/* ─── Weniger Bewegung, wenn im System so eingestellt ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .liste .karte:hover,
+  .knopf:active,
+  .filter button:active { transform: none; }
 }
