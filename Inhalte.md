@@ -71,3 +71,11 @@ Dauer: 60 Min.
 Preis: kostenlos
 Ort: online
 Beschreibung: Welche Wege gibt es? Wo liegen die Fallstricke? Du bekommst einen Überblick und stellst deine Fragen.
+
+### Webinar: Bewerben nach dem Quereinstieg
+Datum: 03.12.2026
+Uhrzeit: 18:30
+Dauer: 90 Min.
+Preis: 29 €
+Ort: online
+Beschreibung: Dein Lebenslauf passt nicht in die üblichen Raster. Wir bauen ihn so, dass dein Wechsel als Stärke lesbar wird.
