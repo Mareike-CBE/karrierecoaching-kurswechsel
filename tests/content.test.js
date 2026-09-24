@@ -280,8 +280,10 @@ test('Inhalte.md: vollständig und lesbar', () => {
   assert.equal(inhalte.allgemein.email, 'hallo@kurswechsel-coaching.de');
   assert.equal(inhalte.ueberMich.name, 'Mareike Kirch');
   assert.ok(inhalte.ueberMich.text.length > 50);
-  assert.deepEqual(inhalte.einzel.map((e) => e.preis), ['kostenlos', '120 €', '540 €']);
-  assert.equal(inhalte.gruppen.length, 3);
+  // Anzahl und Beträge bewusst nicht festgeschrieben: Mareike ändert sie selbst.
+  assert.ok(inhalte.einzel.length >= 1, 'kein Einzelangebot gefunden');
+  assert.ok(inhalte.gruppen.length >= 1, 'kein Gruppentermin gefunden');
+  for (const e of inhalte.einzel) assert.ok(e.preis, `Preis fehlt bei „${e.titel}"`);
   for (const g of inhalte.gruppen) {
     assert.ok(g.termin, `Datum von „${g.titel}" nicht lesbar`);
     assert.match(g.uhrzeit, /^\d{2}:\d{2}$/);
