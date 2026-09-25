@@ -274,6 +274,65 @@ p { text-wrap: pretty; }
   .abschnitt-titel { font-size: 28px; }
 }
 
+/* ─── Anmelde-Dialog ─── */
+button.knopf { border: 0; cursor: pointer; font-family: inherit; }
+button.knopf:disabled { opacity: 0.6; cursor: wait; }
+.knopf--leise {
+  background: transparent;
+  color: var(--deep-violet);
+  border: 1px solid var(--soft-iris);
+}
+.knopf--leise:hover { background: var(--lavender-mist); }
+
+.dialog {
+  width: calc(100% - 32px);
+  max-width: 480px;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 24px 22px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  color: var(--midnight-ink);
+  box-shadow: var(--shadow-md);
+  overflow-y: auto;
+}
+.dialog::backdrop { background: rgba(26, 26, 46, 0.55); }
+.dialog-titel { font-weight: 700; font-size: 22px; line-height: 1.2; margin: 6px 0 4px; }
+.dialog-termin { color: var(--ink-soft); margin-bottom: 16px; }
+
+.formular label { display: block; font-weight: 600; font-size: 15px; margin: 14px 0 6px; }
+.formular .freiwillig { font-weight: 400; color: var(--ink-soft); }
+.formular input,
+.formular textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--soft-iris);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--midnight-ink);
+  font: 400 16px/1.5 var(--body);           /* 16px: iPhone zoomt sonst beim Tippen hinein */
+}
+.formular textarea { resize: vertical; }
+.formular input[aria-invalid="true"],
+.formular textarea[aria-invalid="true"] { border: 2px solid var(--deep-violet); }
+.feld-fehler { color: var(--deep-violet); font-weight: 600; font-size: 14px; margin-top: 6px; }
+.falle { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.datenschutz { color: var(--ink-soft); font-size: 14px; margin-top: 16px; }
+.dialog-meldung { font-size: 17px; }
+
+.dialog-knoepfe { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.dialog-knoepfe .knopf { margin-left: 0; }
+
+.formular input:focus-visible,
+.formular textarea:focus-visible,
+.dialog .knopf:focus-visible {
+  outline: 3px solid var(--deep-violet);
+  outline-offset: 2px;
+}
+
 /* ─── Weniger Bewegung, wenn im System so eingestellt ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -58,5 +58,46 @@
       <p class="fuss-hinweis">Beispielseite aus einem Workshop. Preise und Termine sind Beispiele.</p>
     </div>
   </footer>
+
+  <dialog class="dialog" id="anmeldung" aria-labelledby="anmeldung-titel">
+    <form class="formular" id="anmeldung-formular" novalidate>
+      <p class="label">Anmeldung</p>
+      <h2 class="dialog-titel" id="anmeldung-titel"></h2>
+      <p class="dialog-termin" id="anmeldung-termin"></p>
+
+      <label for="feld-name">Name</label>
+      <input id="feld-name" name="name" autocomplete="name" maxlength="100" required aria-describedby="fehler-name">
+      <p class="feld-fehler" id="fehler-name" hidden></p>
+
+      <label for="feld-email">E-Mail</label>
+      <input id="feld-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="fehler-email">
+      <p class="feld-fehler" id="fehler-email" hidden></p>
+
+      <label for="feld-nachricht">Deine Frage oder Situation <span class="freiwillig">(freiwillig)</span></label>
+      <textarea id="feld-nachricht" name="nachricht" rows="4" maxlength="1000" aria-describedby="fehler-nachricht"></textarea>
+      <p class="feld-fehler" id="fehler-nachricht" hidden></p>
+
+      <!-- Spam-Falle: für Menschen unsichtbar. Nicht entfernen. -->
+      <div class="falle" aria-hidden="true">
+        <label for="feld-webseite">Webseite</label>
+        <input id="feld-webseite" name="webseite" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="datenschutz">Ich nutze deine Angaben nur, um dich zu diesem Termin zu kontaktieren.</p>
+
+      <div class="dialog-knoepfe">
+        <button type="button" class="knopf knopf--leise" data-schliessen>Abbrechen</button>
+        <button type="submit" class="knopf" id="anmeldung-senden">Anmelden</button>
+      </div>
+    </form>
+
+    <div class="dialog-ergebnis" id="anmeldung-ergebnis" hidden>
+      <p class="dialog-meldung" id="anmeldung-meldung" role="status"></p>
+      <div class="dialog-knoepfe">
+        <a class="knopf knopf--leise" id="anmeldung-mail" hidden>E-Mail schreiben</a>
+        <button type="button" class="knopf" data-schliessen>Schließen</button>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
