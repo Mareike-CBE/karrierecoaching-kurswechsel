@@ -31,6 +31,7 @@ Mareike ist Einsteigerin.
 Wenn Mareike „Save to GitHub" oder „Speichern auf GitHub" sagt: alle Änderungen mit einer
 kurzen, klaren Nachricht committen und pushen (`git add -A`, `git commit`, `git push`).
 Netlify ist mit GitHub verbunden: **nur ein Push auf den Zweig `main` geht live**.
+Vor jedem Push immer die Sub-Agenten `privacy` und `copywriter` (`.claude/agents/`) laufen lassen und ihre Ergebnisse Mareike zeigen.
 
 Arbeitest du in einer Cloud-Session und landet die Arbeit auf einem eigenen Zweig
 (z. B. `claude/...`), sag Mareike das deutlich. Die Seite ändert sich erst, wenn der Zweig
