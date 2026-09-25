@@ -9,17 +9,22 @@ export const SUPABASE_KEY = 'sb_publishable_4iSP-UNgXfPMDgjl_D2W1w_r8H3sGAg';
 // Schickt eine fertige Anmeldung an Supabase. Wirft nie, sondern liefert { ok } zurück.
 // fetchFn ist austauschbar, damit die Tests ohne Internet laufen.
 export async function sendeAnmeldung(daten, fetchFn = (...a) => globalThis.fetch(...a), zeitlimitMs = 15000) {
+  // Hängt Supabase (z. B. pausiertes Projekt), soll niemand ewig warten.
+  // AbortController statt AbortSignal.timeout, das gibt es auf iPhones erst ab iOS 16.
+  const abbruch = new AbortController();
+  const wecker = setTimeout(() => abbruch.abort(), zeitlimitMs);
   try {
     const antwort = await fetchFn(`${SUPABASE_URL}/rest/v1/anmeldungen`, {
       method: 'POST',
       headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
       body: JSON.stringify(daten),
-      // Hängt Supabase (z. B. pausiertes Projekt), soll niemand ewig warten.
-      signal: AbortSignal.timeout(zeitlimitMs),
+      signal: abbruch.signal,
     });
     return antwort.ok ? { ok: true } : { ok: false, grund: `HTTP ${antwort.status}` };
   } catch {
     return { ok: false, grund: 'netz' };
+  } finally {
+    clearTimeout(wecker);
   }
 }
 

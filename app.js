@@ -38,7 +38,8 @@ function karte(eintrag, inhalte, gross = false) {
 
   const fuss = el('div', 'karte-fuss');
   fuss.append(el('span', 'preis', eintrag.preis || ''));
-  if (kannAnmelden(eintrag)) {
+  // Ohne <dialog> (iPhone vor iOS 15.4) bleibt der E-Mail-Knopf, sonst passiert beim Tippen nichts.
+  if (kannAnmelden(eintrag) && typeof HTMLDialogElement === 'function') {
     const knopf = el('button', 'knopf', 'Anmelden');
     knopf.type = 'button';
     knopf.addEventListener('click', () => oeffneAnmeldung(eintrag, inhalte));
@@ -135,9 +136,16 @@ function setzeSenden(an) {
   const knopf = $('#anmeldung-senden');
   knopf.disabled = an;
   knopf.textContent = an ? 'Wird gesendet …' : 'Anmelden';
+  $('#anmeldung-abbrechen').disabled = an;
 }
 
 function oeffneAnmeldung(eintrag, inhalte) {
+  // Läuft noch eine Anmeldung, zeigt der Dialog weiter diese an statt eines neuen Termins.
+  // Sonst würde die Antwort später im falschen Termin landen.
+  if (sendetGerade) {
+    $('#anmeldung').showModal();
+    return;
+  }
   offeneAnmeldung = { eintrag, inhalte };
   const formular = $('#anmeldung-formular');
   formular.reset();
@@ -186,6 +194,10 @@ async function sendeFormular(ereignis) {
 
 function verbindeAnmeldung() {
   $('#anmeldung-formular').addEventListener('submit', sendeFormular);
+  // Escape während des Sendens nicht zulassen.
+  $('#anmeldung').addEventListener('cancel', (ereignis) => {
+    if (sendetGerade) ereignis.preventDefault();
+  });
   for (const knopf of document.querySelectorAll('[data-schliessen]')) {
     knopf.addEventListener('click', () => $('#anmeldung').close());
   }

@@ -84,3 +84,13 @@ test('meldeAn: Spam-Falle ausgefüllt → sieht nach Erfolg aus, sendet aber nic
 test('meldeAn: Server-Fehler kommt durch', async () => {
   assert.deepEqual(await meldeAn(TERMIN, GUT, falschesFetch(540).fn), { ok: false, grund: 'HTTP 540' });
 });
+
+test('sendeAnmeldung: klappt auch auf älteren iPhones ohne AbortSignal.timeout (iOS 15)', async () => {
+  const original = AbortSignal.timeout;
+  AbortSignal.timeout = undefined;
+  try {
+    assert.deepEqual(await sendeAnmeldung({}, falschesFetch(201).fn), { ok: true });
+  } finally {
+    AbortSignal.timeout = original;
+  }
+});
