@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   parseInhalte, parseDatum, parseUhrzeit, heuteWert, bereiteVor,
   filterListe, leerHinweis, datumZeitText, mailLink, teileName,
+  kannAnmelden, pruefeAnmeldung, baueAnmeldung,
 } from '../content.js';
 
 const BEISPIEL = `<!-- Anleitung, wird ignoriert.
@@ -321,4 +322,53 @@ test('Inhalte.md: keine privaten Daten', () => {
   for (const [art, muster] of Object.entries(PRIVAT)) {
     assert.doesNotMatch(ECHT, muster, `private Angabe gefunden: ${art}`);
   }
+});
+
+const TERMIN = { art: 'gruppe', titel: 'Info-Abend', termin: parseDatum('15.10.2026'), uhrzeit: '19:00', ort: 'online' };
+
+test('kannAnmelden: nur Gruppentermine mit Datum', () => {
+  assert.equal(kannAnmelden(TERMIN), true);
+  assert.equal(kannAnmelden({ ...TERMIN, termin: null }), false);
+  assert.equal(kannAnmelden({ art: 'einzel', titel: 'Einzelcoaching' }), false);
+});
+
+test('pruefeAnmeldung: gültige Eingaben ohne Nachricht', () => {
+  assert.deepEqual(pruefeAnmeldung({ name: 'Julia Beispiel', email: 'julia@example.de', nachricht: '' }), {});
+});
+
+test('pruefeAnmeldung: Leerzeichen am Rand sind egal', () => {
+  assert.deepEqual(pruefeAnmeldung({ name: '  Julia ', email: ' julia@example.de ', nachricht: ' ' }), {});
+});
+
+test('pruefeAnmeldung: Pflichtfelder', () => {
+  const fehler = pruefeAnmeldung({ name: '   ', email: '', nachricht: '' });
+  assert.equal(fehler.name, 'Bitte gib deinen Namen ein.');
+  assert.equal(fehler.email, 'Bitte gib deine E-Mail-Adresse ein.');
+  assert.equal(fehler.nachricht, undefined);
+});
+
+test('pruefeAnmeldung: E-Mail muss vollständig aussehen', () => {
+  for (const email of ['julia', 'julia@', 'julia@example', '@example.de', 'julia @example.de', 'a@b@c.de']) {
+    assert.equal(pruefeAnmeldung({ name: 'J', email }).email, 'Diese E-Mail-Adresse sieht nicht vollständig aus.', email);
+  }
+  assert.equal(pruefeAnmeldung({ name: 'J', email: 'j.b+kurs@mail.example.de' }).email, undefined);
+});
+
+test('pruefeAnmeldung: Längen wie in der Datenbank, Emoji zählt als 1 Zeichen', () => {
+  assert.equal(pruefeAnmeldung({ name: 'x'.repeat(100), email: 'a@b.de' }).name, undefined);
+  assert.equal(pruefeAnmeldung({ name: 'x'.repeat(101), email: 'a@b.de' }).name, 'Bitte höchstens 100 Zeichen.');
+  assert.equal(pruefeAnmeldung({ name: '🙂'.repeat(100), email: 'a@b.de' }).name, undefined);
+  assert.equal(pruefeAnmeldung({ name: 'J', email: 'a@b.de', nachricht: 'ü'.repeat(1000) }).nachricht, undefined);
+  assert.equal(pruefeAnmeldung({ name: 'J', email: 'a@b.de', nachricht: 'ü'.repeat(1001) }).nachricht, 'Bitte höchstens 1000 Zeichen.');
+  const langeMail = `${'a'.repeat(250)}@b.de`;
+  assert.equal(pruefeAnmeldung({ name: 'J', email: langeMail }).email, 'Diese E-Mail-Adresse sieht nicht vollständig aus.');
+});
+
+test('baueAnmeldung: Format für Supabase', () => {
+  assert.deepEqual(
+    baueAnmeldung(TERMIN, { name: ' Julia ', email: ' julia@example.de ', nachricht: '  Ich will in die IT.  ' }),
+    { termin_datum: '2026-10-15', termin_titel: 'Info-Abend', name: 'Julia', email: 'julia@example.de', nachricht: 'Ich will in die IT.' },
+  );
+  assert.equal(baueAnmeldung(TERMIN, { name: 'J', email: 'a@b.de', nachricht: '   ' }).nachricht, null);
+  assert.equal(baueAnmeldung({ ...TERMIN, termin: parseDatum('3.2.2027') }, { name: 'J', email: 'a@b.de' }).termin_datum, '2027-02-03');
 });

@@ -169,3 +169,41 @@ export function teileName(name) {
   const [haupt = '', ...rest] = (name || '').split(/\s+[–-]\s+/);
   return { haupt: haupt.trim(), zusatz: rest.join(' – ').trim() };
 }
+
+// ─── Anmeldung zu Gruppenterminen ───
+// Gleiche Grenzen wie in supabase/anmeldungen.sql, damit App und Datenbank dasselbe sagen.
+
+// Zählt wie die Datenbank: ein Emoji ist ein Zeichen (String.length würde 2 zählen).
+const zeichen = (text) => Array.from(text).length;
+const EMAIL_MUSTER = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const bereinigt = (wert) => String(wert ?? '').trim();
+
+export function kannAnmelden(eintrag) {
+  return eintrag.art === 'gruppe' && Boolean(eintrag.termin);
+}
+
+export function pruefeAnmeldung(eingaben) {
+  const name = bereinigt(eingaben.name);
+  const email = bereinigt(eingaben.email);
+  const nachricht = bereinigt(eingaben.nachricht);
+  const fehler = {};
+  if (!name) fehler.name = 'Bitte gib deinen Namen ein.';
+  else if (zeichen(name) > 100) fehler.name = 'Bitte höchstens 100 Zeichen.';
+  if (!email) fehler.email = 'Bitte gib deine E-Mail-Adresse ein.';
+  else if (zeichen(email) > 254 || !EMAIL_MUSTER.test(email)) {
+    fehler.email = 'Diese E-Mail-Adresse sieht nicht vollständig aus.';
+  }
+  if (zeichen(nachricht) > 1000) fehler.nachricht = 'Bitte höchstens 1000 Zeichen.';
+  return fehler;
+}
+
+export function baueAnmeldung(eintrag, eingaben) {
+  const wert = String(eintrag.termin.wert); // z. B. "20261015"
+  return {
+    termin_datum: `${wert.slice(0, 4)}-${wert.slice(4, 6)}-${wert.slice(6, 8)}`,
+    termin_titel: eintrag.titel,
+    name: bereinigt(eingaben.name),
+    email: bereinigt(eingaben.email),
+    nachricht: bereinigt(eingaben.nachricht) || null,
+  };
+}
