@@ -45,8 +45,10 @@ daraus stehen unten, die Datei wird nicht gebraucht.
 ## Aufbau
 
 - `Inhalte.md`: **alle** Texte, Angebote, Termine. Nur hier Inhalte ändern, nie in HTML/JS.
-- `content.js`: reine Logik (Einlesen, Termine aufbereiten, Mail-Links), getestet.
-- `app.js`: Anzeige im Browser, Filter, lädt Inhalte beim Wiedererscheinen neu.
+- `content.js`: reine Logik (Einlesen, Termine aufbereiten, Mail-Links, Prüf-Regeln der
+  Anmeldung), getestet.
+- `anmeldung.js`: schickt Anmeldungen an Supabase (siehe unten), getestet.
+- `app.js`: Anzeige im Browser, Filter, Anmelde-Dialog, lädt Inhalte beim Wiedererscheinen neu.
 - `style.css`: nur Styleguide-Farben und ihre transparenten Varianten.
 - `sw.js`: Service Worker, network-first. Updates müssen auf installierten Handys ankommen
   (Cache-Busting). Die Cache-Version `kurswechsel-vN` nur erhöhen, wenn sich `sw.js` selbst
@@ -54,12 +56,32 @@ daraus stehen unten, die Datei wird nicht gebraucht.
 - `netlify.toml`: `Cache-Control: max-age=0, must-revalidate` für alles, kein Build-Schritt.
 - `Steckbrief.md`: der ursprüngliche Auftrag. Spec und Plan: `docs/superpowers/`
   (historisch, die Mac-Pfade darin sind nur Protokoll).
-- Keine Datenbank, keine Logins. Buchung läuft über `mailto:`-Links an die
-  Platzhalter-Adresse hallo@kurswechsel-coaching.de.
+- Keine Logins. Gruppentermine mit Datum: Anmeldung per Formular in Supabase (siehe unten).
+  Einzelcoaching und Termine ohne Datum: `mailto:`-Links an die Platzhalter-Adresse
+  hallo@kurswechsel-coaching.de.
+
+## Anmeldungen (Supabase)
+
+Bewusste Ausnahme von der Kursregel „keine Datenbank“: Anmeldungen zu Gruppenterminen
+landen in Supabase (Projekt `kurswechsel`, Region Frankfurt, kostenloser Tarif).
+Weiterhin keine Logins in der App. Termine stehen weiter nur in `Inhalte.md`.
+
+- Einrichtung und Schutzregeln: `supabase/anmeldungen.sql`. Von außen nur `INSERT` für Termine ab heute.
+- Senden: `anmeldung.js` (öffentlicher Schlüssel, darf öffentlich sein; nie einen geheimen Schlüssel eintragen).
+- Sicherheitsprüfung nach jeder Änderung an der Datenbank: `node tools/pruefe-supabase.mjs`
+  (legt Test-Anmeldungen „TEST – bitte löschen“ an).
+- Mareike sieht die Zahlen im Supabase-Dashboard → Table Editor → `anmeldungen_pro_termin`.
+  Einzelne Anmeldungen unter `anmeldungen`. Alte Anmeldungen dort regelmäßig löschen (Datenschutz).
+- Kostenloser Tarif: Nach 7 Tagen mit wenig Betrieb pausiert Supabase das Projekt. Vorher kommt eine
+  Warn-E-Mail. Wiederherstellen im Dashboard mit „Resume project“. Während der Pause sehen Besucher
+  den Ausweg per E-Mail.
+- Für Claude im Alltag: Projekt-Eintrag `supabase` (nur lesen). Schreibzugriff nur über den
+  claude.ai-Connector und nur mit Mareikes Zustimmung.
 
 ## Befehle
 
-- Tests: `npm test` (Node-eingebauter Testläufer, keine Pakete nötig). Nach jeder Änderung.
+- Tests: `npm test` (Node-eingebauter Testläufer, keine Pakete nötig; `tests/content.test.js`
+  und `tests/anmeldung.test.js`). Nach jeder Änderung.
 - Lokal ansehen: `npm start` → http://localhost:8080
 - Icons neu erzeugen: `python3 tools/make_icons.py` (braucht das Python-Paket Pillow;
   fehlt es, mit `pip install pillow` nachinstallieren)
