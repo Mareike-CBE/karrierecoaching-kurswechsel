@@ -69,7 +69,7 @@ Uhrzeit: 18:30
 Dauer: 90 Min.
 Preis: 29 €
 Ort: online
-Beschreibung: Mit 40 fängst du nicht bei null an. Wir sortieren, was du mitbringst und wo es gebraucht wird.
+Beschreibung: Mit 35 fängst du nicht bei null an. Wir sortieren, was du mitbringst und wo es gebraucht wird.
 
 ### Info-Abend: Wie klappt ein Quereinstieg?
 Datum: 12.11.2026
