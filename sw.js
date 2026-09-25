@@ -9,6 +9,7 @@ const START_DATEIEN = [
   'style.css',
   'app.js',
   'content.js',
+  'anmeldung.js',
   'Inhalte.md',
   'manifest.webmanifest',
   'icons/icon.svg',
