@@ -63,7 +63,7 @@ Preis: kostenlos
 Ort: online
 Beschreibung: Welche Wege gibt es? Wo liegen die Fallstricke? Du bekommst einen Überblick und stellst deine Fragen.
 
-### Webinar: Neustart mit 40
+### Webinar: Neustart mit 35
 Datum: 27.10.2026
 Uhrzeit: 18:30
 Dauer: 90 Min.
