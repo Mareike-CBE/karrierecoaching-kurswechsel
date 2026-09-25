@@ -1,5 +1,23 @@
 /* Kurswechsel: Aussehen nach Mareike_StyleGuide v1.0 (Mai 2026)
    Nur Styleguide-Farben und ihre transparenten Varianten. */
+
+/* Schriften liegen auf dem eigenen Server (Ordner fonts/), nicht bei Google.
+   So geht beim Seitenaufruf keine IP-Adresse an Google. Lizenz: SIL OFL 1.1. */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('fonts/syne.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/inter.woff2') format('woff2');
+}
+
 :root {
   --midnight-ink: #1A1A2E;
   --warm-white: #F5F3EF;
@@ -318,6 +336,7 @@ button.knopf:disabled { opacity: 0.6; cursor: wait; }
 .formular textarea { resize: vertical; }
 .formular input[aria-invalid="true"],
 .formular textarea[aria-invalid="true"] { border: 2px solid var(--deep-violet); }
+.feld-hinweis { color: var(--ink-soft); font-size: 14px; margin: -2px 0 6px; }
 .feld-fehler { color: var(--deep-violet); font-weight: 600; font-size: 14px; margin-top: 6px; }
 .falle { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .datenschutz { color: var(--ink-soft); font-size: 14px; margin-top: 16px; }

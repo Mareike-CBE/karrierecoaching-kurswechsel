@@ -12,9 +12,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Kurswechsel">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="app.js"></script>
 </head>
@@ -74,7 +71,8 @@
       <p class="feld-fehler" id="fehler-email" hidden></p>
 
       <label for="feld-nachricht">Deine Frage oder Situation <span class="freiwillig">(freiwillig)</span></label>
-      <textarea id="feld-nachricht" name="nachricht" rows="4" maxlength="1000" aria-describedby="fehler-nachricht"></textarea>
+      <p class="feld-hinweis" id="hinweis-nachricht">Bitte keine Angaben zu deiner Gesundheit.</p>
+      <textarea id="feld-nachricht" name="nachricht" rows="4" maxlength="1000" aria-describedby="hinweis-nachricht fehler-nachricht"></textarea>
       <p class="feld-fehler" id="fehler-nachricht" hidden></p>
 
       <!-- Spam-Falle: für Menschen unsichtbar. Nicht entfernen. -->

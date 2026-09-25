@@ -14,8 +14,9 @@ const START_DATEIEN = [
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-192.png',
+  'fonts/syne.woff2',
+  'fonts/inter.woff2',
 ];
-const SCHRIFT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
 self.addEventListener('install', (ereignis) => {
   ereignis.waitUntil(
@@ -54,7 +55,7 @@ self.addEventListener('fetch', (ereignis) => {
   const anfrage = ereignis.request;
   if (anfrage.method !== 'GET') return;
   const url = new URL(anfrage.url);
-  if (url.origin === self.location.origin || SCHRIFT_HOSTS.includes(url.hostname)) {
+  if (url.origin === self.location.origin) {
     ereignis.respondWith(netzZuerst(anfrage));
   }
 });

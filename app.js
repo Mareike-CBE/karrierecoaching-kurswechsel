@@ -168,8 +168,11 @@ function zeigeErgebnis(ok) {
       `Danke, du bist angemeldet für „${eintrag.titel}“ am ${eintrag.termin.text}. Ich melde mich per E-Mail bei dir.`;
     mail.hidden = true;
   } else {
-    $('#anmeldung-meldung').textContent = 'Das hat leider nicht geklappt. Schreib mir einfach eine E-Mail.';
-    const link = mailLink(eintrag, inhalte.allgemein.email, inhalte.ueberMich.name);
+    const adresse = inhalte.allgemein.email;
+    $('#anmeldung-meldung').textContent = adresse
+      ? `Das hat nicht geklappt. Schreib mir eine E-Mail an ${adresse}.`
+      : 'Das hat nicht geklappt. Bitte versuch es später noch einmal.';
+    const link = mailLink(eintrag, adresse, inhalte.ueberMich.name);
     if (link) mail.href = link;
     mail.hidden = !link;
   }
