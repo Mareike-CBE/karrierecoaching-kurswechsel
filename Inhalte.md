@@ -5,7 +5,7 @@
   - Zeilen mit ## sind Bereiche. Ihre Namen bitte nicht ändern.
   - Zeilen mit ### sind ein Angebot oder ein Termin. Der Text dahinter ist der Titel.
   - Darunter stehen Zeilen nach dem Muster   Stichwort: Wert
-    Stichwörter: Dauer, Preis, Beschreibung. Bei Terminen außerdem Datum, Uhrzeit, Ort.
+    Stichwörter: Dauer, Preis, Ort, Beschreibung. Bei Terminen außerdem Datum, Uhrzeit.
   - Datum immer so schreiben: 15.10.2026   Uhrzeit so: 19:00
     Den Wochentag rechnet die App selbst aus.
   - Neuer Termin: einen Termin komplett kopieren (von ### bis vor den nächsten ###),
@@ -34,21 +34,25 @@ Ich arbeite strukturiert und direkt. Du bekommst keine Motivationssprüche. Du b
 ### Kennenlerngespräch
 Dauer: 20 Min.
 Preis: kostenlos
+Ort: online
 Beschreibung: Wir sprechen über deine Situation. Danach weißt du, ob ein Coaching dir weiterhilft.
 
 ### Einzelcoaching
 Dauer: 60 Min.
 Preis: 120 €
+Ort: online
 Beschreibung: Wir klären, wo du stehst und wohin du willst. Du gehst mit konkreten nächsten Schritten raus.
 
 ### Paket „Neuer Kurs" (5 Sitzungen)
 Dauer: 5 × 60 Min.
 Preis: 540 €
+Ort: online
 Beschreibung: Fünf Sitzungen über acht bis zehn Wochen. Von der Standortbestimmung bis zur ersten Bewerbung.
 
 ### Design your Career
 Dauer: 3 Monate · 7 Termine à 60 Min.
 Preis: 1.200 € oder 3 × 390 €
+Ort: online
 Beschreibung: Drei Monate, ein klares Ziel. Wir starten mit einem Kick-off. Danach alle zwei Wochen ein 1:1-Check-in.
 Zwischen den Sessions arbeitest du mit Videos, Übungsaufgaben und unserem gemeinsamen Miro-Board.
 Dazu kommt KI-Unterstützung: eine Promptsammlung und Bewerbungscoaching mit KI.

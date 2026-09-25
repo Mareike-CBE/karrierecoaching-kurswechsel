@@ -31,7 +31,7 @@ function karte(eintrag, inhalte, gross = false) {
   const artikel = el('article', gross ? 'karte karte--gross' : 'karte');
   const labelTeile = eintrag.art === 'gruppe'
     ? ['Gruppentermin', datumZeitText(eintrag), eintrag.dauer, eintrag.ort]
-    : ['Einzelcoaching', eintrag.dauer];
+    : ['Einzelcoaching', eintrag.dauer, eintrag.ort];
   artikel.append(el('p', 'label', labelTeile.filter(Boolean).join(' · ')));
   artikel.append(el('h3', null, eintrag.titel));
   if (eintrag.beschreibung) artikel.append(absaetze(eintrag.beschreibung, 'karte-text'));
